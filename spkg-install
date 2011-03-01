@@ -1,21 +1,11 @@
-#!/bin/sh
+#! /bin/sh
 
-
-#if [ "`uname`" = "Darwin" -a "`uname -p`" = "i386" ]; then
-#    echo "No need to build lapack on OSX Intel."
-#    exit 0
-#fi
+set -e
 
 cp patches/make.inc src
 
-cd src/
+cd src
 
 make lapacklib
-
-if [ $? -ne 0 ]; then
-    echo "Error compiling lapack."
-    exit 1
-fi
-
-cp lapack.a "$SAGE_LOCAL"/lib/liblapack.a
+cp lapack.a "$SPKG_LOCAL"/lib/liblapack.a
 
