@@ -2,8 +2,6 @@
 
 set -e
 
-cp patches/make.inc src
-
 cd src
 
 make lapacklib
