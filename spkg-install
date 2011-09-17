@@ -1,9 +1,17 @@
 #! /bin/sh
 
+if [ "$SPKG_LOCAL" = "" ]; then
+   echo "SPKG_LOCAL undefined ... exiting";
+   echo "Maybe run 'qsnake --shell'?"
+   exit 1
+fi
+
 set -e
 
-cd src
-
-make lapacklib
-cp lapack.a "$SPKG_LOCAL"/lib/liblapack.a
-
+cmake -DCMAKE_INSTALL_PREFIX="$SPKG_LOCAL" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_Fortran_FLAGS_RELEASE:STRING="-O3 -march=native -ffast-math -funroll-loops" \
+        -DBUILD_TESTING=no \
+        .
+make
+make install
