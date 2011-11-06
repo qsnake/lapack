@@ -10,7 +10,7 @@ set -e
 
 cmake -DCMAKE_INSTALL_PREFIX="$SPKG_LOCAL" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_Fortran_FLAGS_RELEASE:STRING="-O3 -march=native -ffast-math -funroll-loops" \
+        -DCMAKE_Fortran_FLAGS_RELEASE:STRING="-O3 -fPIC -march=native -ffast-math -funroll-loops" \
         -DBUILD_TESTING=no \
         .
 make
